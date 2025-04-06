@@ -5,33 +5,37 @@ import org.skypro.skyshop.product.Product;
 
 public class App {
     public static void main(String[] args) {
+        // 1. Создаем корзину
+        ProductBasket basket = new ProductBasket();
+
+        // 2. Создаем тестовые продукты
         Product milk = new Product("Молоко", 80);
         Product bread = new Product("Хлеб", 50);
         Product eggs = new Product("Яйца", 120);
 
-        ProductBasket basket = new ProductBasket();
-
-        // Добавляем продукты
+        // 3. Добавляем продукты в корзину
+        System.out.println("=== Добавление продуктов ===");
         basket.addProduct(milk);
         basket.addProduct(bread);
         basket.addProduct(eggs);
 
-        // Пытаемся добавить ещё (демонстрация переполнения)
-        basket.addProduct(new Product("Сок", 90));
-        basket.addProduct(new Product("Печенье", 60));
-        basket.addProduct(new Product("Шоколад", 70)); // Не добавится
-
-        // Выводим содержимое
-        System.out.println("\nТекущее состояние корзины:");
+        // 4. Выводим содержимое корзины
+        System.out.println("\n=== Содержимое корзины ===");
         basket.printContents();
 
-        // Проверяем наличие
-        System.out.println("\nЕсть ли хлеб? " +
-                (basket.containsProduct("хлеб") ? "Да" : "Нет"));
+        // 5. Проверяем наличие конкретных продуктов
+        System.out.println("\n=== Проверка наличия ===");
+        basket.printProductPresence("Хлеб");
+        basket.printProductPresence("Колбаса");
 
-        // Очищаем корзину
+        // 6. Пытаемся добавить в заполненную корзину
+        System.out.println("\n=== Попытка переполнения ===");
+        basket.addProduct(new Product("Сыр", 200));
+        basket.addProduct(new Product("Йогурт", 60));
+
+        // 7. Очищаем корзину
+        System.out.println("\n=== Очистка корзины ===");
         basket.clear();
-        System.out.println("\nПосле очистки:");
         basket.printContents();
     }
 }
