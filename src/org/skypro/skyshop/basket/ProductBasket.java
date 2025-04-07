@@ -4,7 +4,7 @@ import org.skypro.skyshop.product.Product;
 import java.util.Arrays;
 
 public class ProductBasket {
-    private final Product[] products = new Product[3];
+    private final Product[] products = new Product[5];
     private int count = 0;
 
     public void addProduct(Product product) {
@@ -24,6 +24,16 @@ public class ProductBasket {
         return total;
     }
 
+    public int getSpecialProductsCount() {
+        int specialCount = 0;
+        for (int i = 0; i < count; i++) {
+            if (products[i].isSpecial()) {
+                specialCount++;
+            }
+        }
+        return specialCount;
+    }
+
     public void printContents() {
         System.out.println(getFormattedContents());
     }
@@ -37,7 +47,6 @@ public class ProductBasket {
         return false;
     }
 
-    // Новый метод для вывода информации о наличии товара
     public void printProductPresence(String productName) {
         boolean exists = containsProduct(productName);
         System.out.println("\nЕсть ли " + productName + "? " + (exists ? "Да" : "Нет"));
@@ -54,11 +63,12 @@ public class ProductBasket {
             return "В корзине пусто";
         }
 
-        StringBuilder sb = new StringBuilder("Содержимое корзины:\n");
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            sb.append(i+1).append(". ").append(products[i]).append("\n");
+            sb.append(products[i]).append("\n");
         }
-        sb.append("Общая сумма: ").append(getTotalPrice()).append(" руб.");
+        sb.append("Итого: ").append(getTotalPrice()).append(" руб.\n");
+        sb.append("Специальных товаров: ").append(getSpecialProductsCount());
         return sb.toString();
     }
 
