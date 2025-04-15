@@ -1,38 +1,39 @@
 package org.skypro.skyshop;
 
-import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.*;
+import org.skypro.skyshop.search.SearchEngine;
+import org.skypro.skyshop.product.Article;
+
+import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
-        // 1. Создаем корзину
-        ProductBasket basket = new ProductBasket();
+        // Создаем поисковый движок
+        SearchEngine searchEngine = new SearchEngine(10);
 
-        // 2. Создаем тестовые продукты разных типов
+        // Создаем товары
         SimpleProduct milk = new SimpleProduct("Молоко", 80);
-        SimpleProduct bread = new SimpleProduct("Хлеб", 50);
         DiscountedProduct eggs = new DiscountedProduct("Яйца", 120, 10);
         FixPriceProduct cheese = new FixPriceProduct("Сыр");
 
-        // 3. Добавляем продукты в корзину
-        System.out.println("=== Добавление продуктов ===");
-        basket.addProduct(milk);
-        basket.addProduct(bread);
-        basket.addProduct(eggs);
-        basket.addProduct(cheese);
+        // Добавляем товары в движок
+        searchEngine.add(milk);
+        searchEngine.add(eggs);
+        searchEngine.add(cheese);
 
-        // 4. Выводим содержимое корзины
-        System.out.println("\n=== Содержимое корзины ===");
-        basket.printContents();
+        // Создаем статьи
+        Article milkArticle = new Article("Скидки на молоко", "Как купить молоко по акции.");
+        Article cheeseArticle = new Article("Сыр и его виды", "Все, что нужно знать о сыре.");
 
-        // 5. Проверяем наличие конкретных продуктов
-        System.out.println("\n=== Проверка наличия ===");
-        basket.printProductPresence("Хлеб");
-        basket.printProductPresence("Колбаса");
+        // Добавляем статьи в движок
+        searchEngine.add(milkArticle);
+        searchEngine.add(cheeseArticle);
 
-        // 6. Очищаем корзину
-        System.out.println("\n=== Очистка корзины ===");
-        basket.clear();
-        basket.printContents();
+        // Пример поиска
+        System.out.println("Результаты поиска по запросу 'молоко':");
+        System.out.println(Arrays.toString(searchEngine.search("молоко")));
+
+        System.out.println("Результаты поиска по запросу 'сыр':");
+        System.out.println(Arrays.toString(searchEngine.search("сыр")));
     }
 }
