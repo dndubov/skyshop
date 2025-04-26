@@ -2,7 +2,6 @@ package org.skypro.skyshop.search;
 
 import org.skypro.skyshop.product.Searchable;
 
-
 import java.util.Arrays;
 
 public class SearchEngine {
@@ -39,5 +38,37 @@ public class SearchEngine {
 
         // Обрезаем массив до найденных результатов
         return Arrays.copyOf(results, resultCount);
+    }
+
+    // Метод для поиска самого подходящего элемента
+    public Searchable findBestMatch(String search) throws BestResultNotFound {
+        Searchable bestMatch = null;
+        int maxCount = 0;
+
+        for (Searchable item : items) {
+            if (item != null) {
+                int count = countOccurrences(item.getSearchTerm(), search);
+                if (count > maxCount) {
+                    maxCount = count;
+                    bestMatch = item;
+                }
+            }
+        }
+
+        if (bestMatch == null) {
+            throw new BestResultNotFound("Не найдено подходящих результатов для запроса: " + search);
+        }
+        return bestMatch;
+    }
+
+    // Вспомогательный метод для подсчета вхождений подстроки в строку
+    private int countOccurrences(String str, String substring) {
+        int count = 0;
+        int index = 0;
+        while ((index = str.indexOf(substring, index)) != -1) {
+            count++;
+            index += substring.length();
+        }
+        return count;
     }
 }
