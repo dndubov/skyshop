@@ -11,22 +11,22 @@ public class Article implements Searchable {
 
     @Override
     public String getSearchTerm() {
-        return title + " " + text; // Комбинированный термин поиска: название и текст статьи
+        return title + " " + text;
     }
 
     @Override
     public String getContentType() {
-        return "ARTICLE"; // Тип контента — статья
-    }
-
-    @Override
-    public String getStringRepresentation() {
-        return title + " — тип " + getContentType(); // Представление объекта в виде строки
+        return "ARTICLE";
     }
 
     @Override
     public String getName() {
-        return title; // Для поиска используем название статьи
+        return title;
+    }
+
+    @Override
+    public String getStringRepresentation() {
+        return title + " — тип " + getContentType();
     }
 
     @Override
