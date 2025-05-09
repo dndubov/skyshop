@@ -10,7 +10,7 @@ public class DiscountedProduct extends Product {
             throw new IllegalArgumentException("Базовая цена продукта должна быть больше 0.");
         }
         if (discountPercent < 0 || discountPercent > 100) {
-            throw new IllegalArgumentException("Процент скидки должен быть в пределах от 0 до 100.");
+            throw new IllegalArgumentException("Процент скидки должен быть от 0 до 100.");
         }
         this.basePrice = basePrice;
         this.discountPercent = discountPercent;

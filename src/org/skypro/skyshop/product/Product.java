@@ -10,23 +10,23 @@ public abstract class Product implements Searchable {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String getSearchTerm() {
-        return name; // Возвращаем название товара как термин для поиска
+        return name;
     }
 
     @Override
     public String getContentType() {
-        return "PRODUCT"; // Тип контента — товар
+        return "PRODUCT";
     }
 
     @Override
     public String getStringRepresentation() {
-        return getName() + " — тип " + getContentType(); // Представление объекта в виде строки
-    }
-
-    public String getName() {
-        return name;
+        return getName() + " — тип " + getContentType();
     }
 
     public abstract int getPrice();
