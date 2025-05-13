@@ -6,7 +6,7 @@ import org.skypro.skyshop.search.BestResultNotFound;
 import org.skypro.skyshop.basket.ProductBasket;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
@@ -45,9 +45,9 @@ public class App {
 
         // Поиск
         try {
-            Map<String, Searchable> results = searchEngine.search("сок");
+            Set<Searchable> results = searchEngine.search("сок");
             System.out.println("\nРезультаты поиска по 'сок':");
-            results.forEach((name, item) -> System.out.println(item.getStringRepresentation()));
+            results.forEach(item -> System.out.println(item.getStringRepresentation()));
 
             Searchable bestMatch = searchEngine.findBestMatch("молоко");
             System.out.println("\nЛучший результат: " + bestMatch.getStringRepresentation());

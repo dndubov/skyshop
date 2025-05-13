@@ -5,21 +5,19 @@ import org.skypro.skyshop.product.Searchable;
 import java.util.*;
 
 public class SearchEngine {
-    private final List<Searchable> items = new ArrayList<>();
+    private Set<Searchable> items = new HashSet<>();
 
     public void add(Searchable item) {
         items.add(item);
     }
 
-    public Map<String, Searchable> search(String searchTerm) {
-        Map<String, Searchable> results = new TreeMap<>();
-
+    public Set<Searchable> search(String keyword) {
+        Set<Searchable> results = new TreeSet<>(new SearchableComparator());
         for (Searchable item : items) {
-            if (item.getSearchTerm().toLowerCase().contains(searchTerm.toLowerCase())) {
-                results.put(item.getName(), item);
+            if (item.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                results.add(item);
             }
         }
-
         return results;
     }
 
