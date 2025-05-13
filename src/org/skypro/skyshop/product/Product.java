@@ -26,9 +26,7 @@ public abstract class Product implements Searchable {
     }
 
     @Override
-    public String getStringRepresentation() {
-        return getName() + " — тип " + getContentType();
-    }
+    public abstract String getStringRepresentation();
 
     @Override
     public boolean equals(Object o) {

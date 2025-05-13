@@ -40,7 +40,7 @@ public class Article implements Searchable {
 
     @Override
     public String getStringRepresentation() {
-        return title + " — тип " + getContentType();
+        return String.format("%s — тип %s\nОписание: %s", title, getContentType(), text);
     }
 
     @Override

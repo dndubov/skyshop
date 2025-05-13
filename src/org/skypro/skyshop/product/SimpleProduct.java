@@ -22,6 +22,11 @@ public class SimpleProduct extends Product {
     }
 
     @Override
+    public String getStringRepresentation() {
+        return String.format("%s — тип %s, цена %d руб.", getName(), getContentType(), price);
+    }
+
+    @Override
     public String toString() {
         return String.format("%s: %d руб.", getName(), price);
     }

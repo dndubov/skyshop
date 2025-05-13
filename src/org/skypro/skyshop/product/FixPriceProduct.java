@@ -21,4 +21,10 @@ public class FixPriceProduct extends Product {
     public String toString() {
         return String.format("%s: Фиксированная цена %d руб.", getName(), FIXED_PRICE);
     }
+
+    @Override
+    public String getStringRepresentation() {
+        return String.format("%s — тип %s, фиксированная цена %d руб.",
+                getName(), getContentType(), getPrice());
+    }
 }
