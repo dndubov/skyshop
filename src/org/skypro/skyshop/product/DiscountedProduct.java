@@ -30,4 +30,10 @@ public class DiscountedProduct extends Product {
     public String toString() {
         return String.format("%s: %d руб. (скидка %d%%)", getName(), getPrice(), discountPercent);
     }
+
+    @Override
+    public String getStringRepresentation() {
+        return String.format("%s — тип %s, цена со скидкой %d руб. (скидка %d%%, была %d руб.)",
+                getName(), getContentType(), getPrice(), discountPercent, basePrice);
+    }
 }
