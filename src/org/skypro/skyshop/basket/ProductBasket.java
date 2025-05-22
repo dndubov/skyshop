@@ -24,20 +24,25 @@ public class ProductBasket {
             return;
         }
 
-        int totalPrice = 0;
-        int specialCount = 0;
+        basket.values().stream()
+                .flatMap(Collection::stream)
+                .forEach(System.out::println);
 
-        for (List<Product> productList : basket.values()) {
-            for (Product product : productList) {
-                System.out.println(product);
-                totalPrice += product.getPrice();
-                if (product.isSpecial()) {
-                    specialCount++;
-                }
-            }
-        }
+        System.out.println("Итого: " + getTotalPrice() + " руб.");
+        System.out.println("Специальных товаров: " + getSpecialCount());
+    }
 
-        System.out.println("Итого: " + totalPrice + " руб.");
-        System.out.println("Специальных товаров: " + specialCount);
+    private int getTotalPrice() {
+        return basket.values().stream()
+                .flatMap(Collection::stream)
+                .mapToInt(Product::getPrice)
+                .sum();
+    }
+
+    private long getSpecialCount() {
+        return basket.values().stream()
+                .flatMap(Collection::stream)
+                .filter(Product::isSpecial)
+                .count();
     }
 }
